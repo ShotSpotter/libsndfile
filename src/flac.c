@@ -305,7 +305,7 @@ flac_buffer_copy (SF_PRIVATE *psf)
 
 		case PFLAC_PCM_FLOAT :
 			{	float *retpcm = (float*) pflac->ptr ;
-				float norm = (psf->norm_float == SF_TRUE) ? 1.0 / (1 << (frame->header.bits_per_sample - 1)) : 1.0 ;
+				float norm = (psf->norm_float == SF_TRUE) ? 1.0 / ((int64_t) 1 << (frame->header.bits_per_sample - 1)) : 1.0 ;
 
 				for (i = 0 ; i < len && pflac->remain > 0 ; i++)
 				{	offset = pflac->pos + i * channels ;
@@ -326,7 +326,7 @@ flac_buffer_copy (SF_PRIVATE *psf)
 
 		case PFLAC_PCM_DOUBLE :
 			{	double *retpcm = (double*) pflac->ptr ;
-				double norm = (psf->norm_double == SF_TRUE) ? 1.0 / (1 << (frame->header.bits_per_sample - 1)) : 1.0 ;
+				double norm = (psf->norm_double == SF_TRUE) ? 1.0 / ((int64_t) 1 << (frame->header.bits_per_sample - 1)) : 1.0 ;
 
 				for (i = 0 ; i < len && pflac->remain > 0 ; i++)
 				{	offset = pflac->pos + i * channels ;
